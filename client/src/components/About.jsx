@@ -150,7 +150,7 @@ export default function About({ onNavigate, stats = { total: 0, statusCounts: {}
 
       {/* Statistik */}
       <Reveal delay={60}>
-        <section className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <section className="grid grid-cols-1 gap-4 min-[400px]:grid-cols-2 lg:grid-cols-4">
           {statItems.map(({ icon, label, value, accent }) => (
             <StatCard key={label} icon={icon} label={label} value={value} accent={accent} />
           ))}

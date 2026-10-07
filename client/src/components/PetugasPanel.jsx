@@ -224,7 +224,8 @@ function ReportTable({ onNavigate, onChanged }) {
       ) : reports.length === 0 ? (
         <p className="p-6 text-sm text-slate-500">Tidak ada laporan.</p>
       ) : (
-        <div className="overflow-x-auto">
+        <>
+        <div className="hidden overflow-x-auto md:block">
           <table className="w-full text-left text-sm">
             <thead className="bg-slate-50 text-xs font-bold uppercase tracking-wide text-slate-500">
               <tr>
@@ -256,7 +257,7 @@ function ReportTable({ onNavigate, onChanged }) {
                       <StatusSelect report={r} onChanged={handled} />
                       <button
                         onClick={() => remove(r)}
-                        className="grid h-8 w-8 place-items-center rounded-lg text-slate-400 transition hover:bg-red-50 hover:text-red-600"
+                        className="grid h-11 w-11 place-items-center rounded-lg text-slate-400 transition hover:bg-red-50 hover:text-red-600"
                         title="Hapus laporan"
                         aria-label="Hapus laporan"
                       >
@@ -269,6 +270,39 @@ function ReportTable({ onNavigate, onChanged }) {
             </tbody>
           </table>
         </div>
+
+        <div className="divide-y divide-slate-100 md:hidden">
+          {reports.map((r) => (
+            <div key={r.id} className="space-y-3 p-4">
+              <div>
+                <button
+                  className="text-left font-bold text-slate-800 hover:text-emerald-700"
+                  onClick={() => onNavigate('detail', r.id)}
+                >
+                  {r.title}
+                </button>
+                <p className="mt-1 flex flex-wrap items-center gap-2 text-xs text-slate-400">
+                  <span>{r.category}</span>
+                  <StatusBadge status={r.status} />
+                  <span>{timeAgo(r.created_at)}</span>
+                </p>
+              </div>
+              <p className="text-sm text-slate-500">{r.location || 'Tanpa lokasi'}</p>
+              <div className="flex items-center justify-between gap-2">
+                <StatusSelect report={r} onChanged={handled} />
+                <button
+                  onClick={() => remove(r)}
+                  className="grid h-11 w-11 place-items-center rounded-lg text-slate-400 transition hover:bg-red-50 hover:text-red-600"
+                  title="Hapus laporan"
+                  aria-label="Hapus laporan"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        </>
       )}
 
       {pagination.totalPages > 1 && (

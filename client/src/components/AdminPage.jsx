@@ -63,36 +63,68 @@ function OfficerPerformance() {
       ) : officers.length === 0 ? (
         <p className="p-6 text-sm text-slate-500">Belum ada akun petugas terdaftar.</p>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50 text-xs font-bold uppercase tracking-wide text-slate-500">
-              <tr>
-                <th className="px-4 py-3">Petugas</th>
-                <th className="px-4 py-3">Ditugaskan</th>
-                <th className="px-4 py-3">Dalam Proses</th>
-                <th className="px-4 py-3">Selesai</th>
-                <th className="px-4 py-3">Rata-rata Penyelesaian</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {officers.map((o) => (
-                <tr key={o.id} className="transition hover:bg-slate-50">
-                  <td className="px-4 py-3 font-bold text-slate-800">{o.full_name}</td>
-                  <td className="px-4 py-3 text-slate-600">{o.assigned_count}</td>
-                  <td className="px-4 py-3 text-slate-600">{o.in_progress_count}</td>
-                  <td className="px-4 py-3">
-                    <span className="inline-flex items-center gap-1 font-bold text-green-700">
-                      <CheckCircle2 className="h-4 w-4" /> {o.resolved_count}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-slate-600">
-                    {o.avg_resolution_hours != null ? `${o.avg_resolution_hours} jam` : '—'}
-                  </td>
+        <>
+          <div className="hidden overflow-x-auto md:block">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-slate-50 text-xs font-bold uppercase tracking-wide text-slate-500">
+                <tr>
+                  <th className="px-4 py-3">Petugas</th>
+                  <th className="px-4 py-3">Ditugaskan</th>
+                  <th className="px-4 py-3">Dalam Proses</th>
+                  <th className="px-4 py-3">Selesai</th>
+                  <th className="px-4 py-3">Rata-rata Penyelesaian</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {officers.map((o) => (
+                  <tr key={o.id} className="transition hover:bg-slate-50">
+                    <td className="px-4 py-3 font-bold text-slate-800">{o.full_name}</td>
+                    <td className="px-4 py-3 text-slate-600">{o.assigned_count}</td>
+                    <td className="px-4 py-3 text-slate-600">{o.in_progress_count}</td>
+                    <td className="px-4 py-3">
+                      <span className="inline-flex items-center gap-1 font-bold text-green-700">
+                        <CheckCircle2 className="h-4 w-4" /> {o.resolved_count}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-slate-600">
+                      {o.avg_resolution_hours != null ? `${o.avg_resolution_hours} jam` : '—'}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="divide-y divide-slate-100 md:hidden">
+            {officers.map((o) => (
+              <div key={o.id} className="space-y-3 p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="font-bold text-slate-800">{o.full_name}</span>
+                  <span className="inline-flex shrink-0 items-center gap-1 font-bold text-green-700">
+                    <CheckCircle2 className="h-4 w-4" /> {o.resolved_count}
+                  </span>
+                </div>
+                <dl className="grid grid-cols-3 gap-2 text-center text-sm">
+                  <div className="rounded-lg bg-slate-50 p-2.5">
+                    <dt className="text-[11px] font-semibold text-slate-400">Ditugaskan</dt>
+                    <dd className="font-bold text-slate-700">{o.assigned_count}</dd>
+                  </div>
+                  <div className="rounded-lg bg-slate-50 p-2.5">
+                    <dt className="text-[11px] font-semibold text-slate-400">Diproses</dt>
+                    <dd className="font-bold text-slate-700">{o.in_progress_count}</dd>
+                  </div>
+                  <div className="rounded-lg bg-slate-50 p-2.5">
+                    <dt className="text-[11px] font-semibold text-slate-400">Selesai</dt>
+                    <dd className="font-bold text-green-700">{o.resolved_count}</dd>
+                  </div>
+                </dl>
+                <p className="text-xs text-slate-500">
+                  Rata-rata penyelesaian: {o.avg_resolution_hours != null ? `${o.avg_resolution_hours} jam` : '—'}
+                </p>
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </section>
   );
@@ -271,7 +303,8 @@ function ManageOfficers() {
         ) : officers.length === 0 ? (
           <p className="mt-4 text-sm text-slate-500">Belum ada akun petugas.</p>
         ) : (
-          <div className="mt-4 overflow-x-auto">
+          <>
+          <div className="mt-4 hidden overflow-x-auto md:block">
             <table className="w-full text-left text-sm">
               <thead className="bg-slate-50 text-xs font-bold uppercase tracking-wide text-slate-500">
                 <tr>
@@ -367,7 +400,7 @@ function ManageOfficers() {
                         <div className="flex items-center justify-end gap-1.5">
                           <button
                             onClick={() => startEdit(o)}
-                            className="grid h-8 w-8 place-items-center rounded-lg text-slate-400 transition hover:bg-blue-50 hover:text-blue-600"
+                            className="grid h-11 w-11 place-items-center rounded-lg text-slate-400 transition hover:bg-blue-50 hover:text-blue-600"
                             title="Edit petugas"
                             aria-label="Edit petugas"
                           >
@@ -375,7 +408,7 @@ function ManageOfficers() {
                           </button>
                           <button
                             onClick={() => startReset(o)}
-                            className="grid h-8 w-8 place-items-center rounded-lg text-slate-400 transition hover:bg-amber-50 hover:text-amber-600"
+                            className="grid h-11 w-11 place-items-center rounded-lg text-slate-400 transition hover:bg-amber-50 hover:text-amber-600"
                             title="Reset kata sandi"
                             aria-label="Reset kata sandi"
                           >
@@ -383,7 +416,7 @@ function ManageOfficers() {
                           </button>
                           <button
                             onClick={() => remove(o)}
-                            className="grid h-8 w-8 place-items-center rounded-lg text-slate-400 transition hover:bg-red-50 hover:text-red-600"
+                            className="grid h-11 w-11 place-items-center rounded-lg text-slate-400 transition hover:bg-red-50 hover:text-red-600"
                             title="Hapus petugas"
                             aria-label="Hapus petugas"
                           >
@@ -397,6 +430,111 @@ function ManageOfficers() {
               </tbody>
             </table>
           </div>
+
+          <div className="mt-4 divide-y divide-slate-100 md:hidden">
+            {officers.map((o) => {
+              if (editingId === o.id) {
+                return (
+                  <div key={o.id} className="space-y-3 bg-emerald-50/40 p-4">
+                    <input
+                      value={editUsername}
+                      onChange={(e) => setEditUsername(e.target.value)}
+                      placeholder="Username"
+                      className="w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm outline-none focus:border-emerald-400"
+                    />
+                    <input
+                      value={editFullName}
+                      onChange={(e) => setEditFullName(e.target.value)}
+                      placeholder="Nama lengkap"
+                      className="w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm outline-none focus:border-emerald-400"
+                    />
+                    {editError && <p className="text-xs font-semibold text-red-600">{editError}</p>}
+                    <div className="flex gap-2">
+                      <button
+                        onClick={saveEdit}
+                        disabled={savingEdit}
+                        className="rounded-lg bg-emerald-600 px-4 py-2 text-xs font-bold text-white transition hover:bg-emerald-700 disabled:opacity-60"
+                      >
+                        {savingEdit ? 'Menyimpan...' : 'Simpan'}
+                      </button>
+                      <button
+                        onClick={cancelEdit}
+                        className="rounded-lg border border-slate-200 px-4 py-2 text-xs font-bold text-slate-600 transition hover:bg-slate-50"
+                      >
+                        Batal
+                      </button>
+                    </div>
+                  </div>
+                );
+              }
+              if (resettingId === o.id) {
+                return (
+                  <div key={o.id} className="space-y-3 bg-amber-50/40 p-4">
+                    <p className="text-sm font-bold text-slate-800">Reset kata sandi @{o.username}</p>
+                    <input
+                      type="password"
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      placeholder="Kata sandi baru (min. 6)"
+                      className="w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm outline-none focus:border-emerald-400"
+                    />
+                    {resetError && <p className="text-xs font-semibold text-red-600">{resetError}</p>}
+                    <div className="flex gap-2">
+                      <button
+                        onClick={saveReset}
+                        disabled={savingReset}
+                        className="rounded-lg bg-emerald-600 px-4 py-2 text-xs font-bold text-white transition hover:bg-emerald-700 disabled:opacity-60"
+                      >
+                        {savingReset ? 'Menyimpan...' : 'Simpan'}
+                      </button>
+                      <button
+                        onClick={cancelReset}
+                        className="rounded-lg border border-slate-200 px-4 py-2 text-xs font-bold text-slate-600 transition hover:bg-slate-50"
+                      >
+                        Batal
+                      </button>
+                    </div>
+                  </div>
+                );
+              }
+              return (
+                <div key={o.id} className="flex items-center justify-between gap-3 p-4">
+                  <div className="min-w-0">
+                    <p className="truncate font-bold text-slate-800">@{o.username}</p>
+                    <p className="truncate text-sm text-slate-500">{o.full_name || '—'}</p>
+                    <p className="text-xs text-slate-400">{o.report_count ?? 0} laporan</p>
+                  </div>
+                  <div className="flex shrink-0 gap-1">
+                    <button
+                      onClick={() => startEdit(o)}
+                      className="grid h-11 w-11 place-items-center rounded-lg text-slate-400 transition hover:bg-blue-50 hover:text-blue-600"
+                      title="Edit petugas"
+                      aria-label="Edit petugas"
+                    >
+                      <Pencil className="h-4 w-4" />
+                    </button>
+                    <button
+                      onClick={() => startReset(o)}
+                      className="grid h-11 w-11 place-items-center rounded-lg text-slate-400 transition hover:bg-amber-50 hover:text-amber-600"
+                      title="Reset kata sandi"
+                      aria-label="Reset kata sandi"
+                    >
+                      <KeyRound className="h-4 w-4" />
+                    </button>
+                    <button
+                      onClick={() => remove(o)}
+                      className="grid h-11 w-11 place-items-center rounded-lg text-slate-400 transition hover:bg-red-50 hover:text-red-600"
+                      title="Hapus petugas"
+                      aria-label="Hapus petugas"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          </>
         )}
       </section>
     </div>

@@ -101,7 +101,7 @@ export default function App() {
           )}
         </div>
       </main>
-      <footer className="bg-gradient-to-r from-emerald-900 to-emerald-600 py-6 text-center text-sm font-medium text-white/90">
+      <footer className="bg-gradient-to-r from-emerald-900 to-emerald-600 py-6 pb-safe text-center text-sm font-medium text-white/90">
         Portal Lapor Warga — Bersama membangun lingkungan yang lebih baik.
       </footer>
 

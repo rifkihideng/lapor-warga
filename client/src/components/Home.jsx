@@ -194,7 +194,7 @@ export default function Home({ stats, onNavigate, user, onChanged }) {
 
       {/* Stats */}
       <Reveal delay={60}>
-        <section className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <section className="grid grid-cols-1 gap-4 min-[400px]:grid-cols-2 lg:grid-cols-4">
           {STAT_CARDS.map(({ key, label, icon: Icon, iconClass, value }) => (
             <div
               key={key}

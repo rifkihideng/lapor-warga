@@ -24,8 +24,7 @@ import {
   Bar,
   PieChart,
   Pie,
-  Cell,
-  Legend
+  Cell
 } from 'recharts';
 import { api } from '../api.js';
 import { STATUS_LABEL, STATUSES } from '../constants.js';
@@ -174,7 +173,7 @@ export default function Dashboard({ user }) {
       </div>
 
       {/* KPI */}
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      <div className="grid grid-cols-1 gap-4 min-[400px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
         {kpis.map(({ icon: Icon, label, value, accent }) => (
           <div key={label} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <span className={`grid h-10 w-10 place-items-center rounded-xl ${accent}`}>
@@ -229,9 +228,20 @@ export default function Dashboard({ user }) {
                   ))}
                 </Pie>
                 <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid #e2e8f0', fontSize: 13 }} />
-                <Legend iconType="circle" wrapperStyle={{ fontSize: 12 }} />
               </PieChart>
             </ResponsiveContainer>
+            <div className="mt-2 flex flex-wrap justify-center gap-x-4 gap-y-2">
+              {categoryData.length === 0 ? (
+                <span className="text-xs text-slate-400">Belum ada data kategori.</span>
+              ) : (
+                categoryData.map((c) => (
+                  <span key={c.name} className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600">
+                    <span className="h-2.5 w-2.5 rounded-full" style={{ background: c.color }} />
+                    {c.name} · {c.value}
+                  </span>
+                ))
+              )}
+            </div>
           </div>
         </section>
 

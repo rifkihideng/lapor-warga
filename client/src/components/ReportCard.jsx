@@ -54,7 +54,7 @@ export default function ReportCard({ report, onClick, onDelete, onRestore }) {
                 e.stopPropagation();
                 onDelete(report);
               }}
-              className="grid h-8 w-8 place-items-center rounded-lg text-slate-400 transition hover:bg-red-50 hover:text-red-600"
+              className="grid h-11 w-11 place-items-center rounded-lg text-slate-400 transition hover:bg-red-50 hover:text-red-600"
               title="Hapus laporan"
               aria-label="Hapus laporan"
             >
@@ -67,7 +67,7 @@ export default function ReportCard({ report, onClick, onDelete, onRestore }) {
                 e.stopPropagation();
                 onRestore(report);
               }}
-              className="grid h-8 w-8 place-items-center rounded-lg text-slate-400 transition hover:bg-emerald-50 hover:text-emerald-600"
+              className="grid h-11 w-11 place-items-center rounded-lg text-slate-400 transition hover:bg-emerald-50 hover:text-emerald-600"
               title="Pulihkan laporan"
               aria-label="Pulihkan laporan"
             >

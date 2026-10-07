@@ -44,7 +44,7 @@ export default function ReportMap({ reports, onOpen, center, circleRadiusKm }) {
   const mapCenter = center || (withCoords.length ? [withCoords[0].latitude, withCoords[0].longitude] : [-6.2, 106.816666]);
 
   return (
-    <div className="relative z-0 h-[480px] overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
+    <div className="relative z-0 h-[360px] overflow-hidden rounded-2xl border border-slate-200 shadow-sm sm:h-[440px] md:h-[480px]">
       <MapContainer center={mapCenter} zoom={center ? 14 : 12} scrollWheelZoom className="h-full w-full">
         <TileLayer
           attribution='&copy; OpenStreetMap contributors'
