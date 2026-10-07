@@ -113,6 +113,12 @@ app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 app.use('/uploads', express.static(uploadsDir));
 
+// Jangan cache respons API (agar header CORS selalu akurat & tidak di-cache CDN Vercel).
+app.use('/api', (req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store');
+  next();
+});
+
 // Rate limiting
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
