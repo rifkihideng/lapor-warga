@@ -1,19 +1,16 @@
-import { BarChart3, ClipboardList, LogIn, LogOut, Megaphone, ShieldCheck, User } from 'lucide-react';
+import { BarChart3, ClipboardList, LogIn, LogOut, ShieldCheck, User } from 'lucide-react';
+import Logo from './Logo.jsx';
 
 export default function Navbar({ onNavigate, user, onLogout }) {
   return (
     <header className="sticky top-0 z-20 bg-gradient-to-r from-emerald-900 via-emerald-700 to-teal-600 text-white shadow-lg shadow-emerald-900/20">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-5">
         <button
-          className="flex items-center gap-2.5 text-lg font-extrabold tracking-tight"
+          className="flex items-center gap-2.5"
           onClick={() => onNavigate('home')}
+          aria-label="LaporWarga — beranda"
         >
-          <span className="grid h-9 w-9 place-items-center rounded-xl border border-white/25 bg-white/15 backdrop-blur">
-            <Megaphone className="h-5 w-5" />
-          </span>
-          <span className="hidden sm:inline">
-            Lapor<span className="text-emerald-200">Warga</span>
-          </span>
+          <Logo size={38} tone="light" textClassName="hidden sm:inline" />
         </button>
 
         <nav className="flex items-center gap-2">

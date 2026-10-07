@@ -82,6 +82,159 @@ html {
   animation: word-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* Cinematic loader */
+.cinematic-bg {
+  background: linear-gradient(
+    160deg,
+    #03130d 0%,
+    #07261d 22%,
+    #0b1220 48%,
+    #0e2a26 74%,
+    #03130d 100%
+  );
+  background-size: 300% 300%;
+  animation: cinematic-gradient 10s ease-in-out infinite;
+}
+
+@keyframes cinematic-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.blob {
+  animation: blob-drift 9s ease-in-out infinite alternate;
+}
+
+@keyframes blob-drift {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(36px, -44px) scale(1.18);
+  }
+}
+
+.conic {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(16, 185, 129, 0.32) 80deg,
+    transparent 160deg,
+    rgba(13, 148, 136, 0.28) 240deg,
+    transparent 360deg
+  );
+  animation: spin-slow 7s linear infinite;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.particle {
+  position: absolute;
+  bottom: -12px;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: rgba(94, 205, 174, 0.45);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+  animation-name: particle-rise;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes particle-rise {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+
+.icon-pulse {
+  animation: icon-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes icon-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 0 20px rgba(16, 185, 129, 0);
+  }
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #34d399, #14b8a6, #0d9488);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.title-gradient {
+  background: linear-gradient(90deg, #34d399, #14b8a6, #0d9488);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bar-fill {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #10b981, #0d9488, #14b8a6);
+}
+
+.bar-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  transform: translateX(-100%);
+  animation: bar-shine 1.4s ease-in-out infinite;
+}
+
+@keyframes bar-shine {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-bg,
+  .blob,
+  .conic,
+  .particle,
+  .icon-pulse,
+  .bar-shine {
+    animation: none;
+  }
+  .word-in {
+    opacity: 1;
+    animation: none;
+  }
+  .particle {
+    display: none;
+  }
+}
+
 /* Leaflet */
 .leaflet-container {
   font-family: var(--font-sans);
