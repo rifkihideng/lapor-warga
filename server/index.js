@@ -996,6 +996,7 @@ app.use((err, req, res, next) => {
 });
 
 export { app };
+export default app;
 
 // Jalankan sebagai server hanya ketika file ini dieksekusi langsung (dev lokal).
 // Saat diimpor oleh serverless function Vercel (api/index.js), skip app.listen.
